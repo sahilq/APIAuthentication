@@ -7,8 +7,9 @@ class App extends Component {
   render() {
     return (
       <div>
+        {/* render nabBar */}
         <Header />
-
+        {/* render components */}
         <div className="container">{this.props.children}</div>
       </div>
     );

@@ -1,11 +1,19 @@
+//required libraries
 const passport = require("passport");
 const JwtStrategy = require("passport-jwt").Strategy;
 const LocalStrategy = require("passport-local").Strategy;
 const { ExtractJwt } = require("passport-jwt");
+
+//local files
 const { JWT_SECRET } = require("./config/index");
 const User = require("./models/users");
 
 //JWT STARATEGY
+
+//TODO:
+//1- Validate token[*]
+//2- Search user[*]
+//3- return user[*]
 passport.use(
   new JwtStrategy(
     {
@@ -14,7 +22,7 @@ passport.use(
     },
     async (payload, done) => {
       try {
-        // finding the user
+        // finding the user by user_id saved in token
         const user = await User.findById(payload.sub);
         // check if exists
         if (!user) {
@@ -31,7 +39,14 @@ passport.use(
 );
 
 //LOCAL STRATEGY
+
+//TODO:
+//1- Search user[*]
+//2- Call user models method to validate password[*]
+//3- return user[*]
+
 passport.use(
+  //local strategy uses Username
   new LocalStrategy(
     {
       usernameField: "email"
@@ -45,7 +60,6 @@ passport.use(
         if (!user) {
           return done(null, false);
         }
-        console.log("User password is", user.password);
         // Check if the password is correct
         const isMatch = await user.isValidPassword(password);
         // If not, handle it

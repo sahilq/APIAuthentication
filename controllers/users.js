@@ -3,6 +3,7 @@ const JWT = require("jsonwebtoken");
 const User = require("../models/users");
 const { JWT_SECRET } = require("../config/index");
 
+//creating token
 signtoken = newUser => {
   return JWT.sign(
     {
@@ -13,7 +14,7 @@ signtoken = newUser => {
     JWT_SECRET
   );
 };
-
+//export function
 module.exports = {
   signUp: async (req, res, next) => {
     const { email, password, name } = req.value.body;
@@ -42,9 +43,9 @@ module.exports = {
       id: req.user._id,
       name: req.user.name
     };
-    //respond with token and userId
+    //respond with token and user details
     res.status(200).json({ token, user });
-  },
+  }, //random protected resource for testing
   secret: async (req, res, next) => {
     console.log(`User.secret() called`);
     res.json({ message: "IN USERS SECRET" });
