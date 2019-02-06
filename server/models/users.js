@@ -22,7 +22,7 @@ const userSchema = new Schema({
   }
 });
 
-//////////User Methods Required in user models//////////////
+//////////User Methods Required in user models to make bcrypt required only once//////////////
 
 //Hash password
 userSchema.pre("save", async function(next) {
