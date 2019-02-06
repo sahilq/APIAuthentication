@@ -5,6 +5,7 @@ import * as types from "../actions/types";
 const postUri = "http://192.168.1.140:5000/posts";
 const commentUri = "http://192.168.1.140:5000/comments";
 
+//fetch post
 export function* getPosts() {
   try {
     const res = yield call(axios.get, postUri);
@@ -17,7 +18,7 @@ export function* getPosts() {
     console.error(e);
   }
 }
-
+//delete post
 export function* deletePost(action) {
   try {
     yield axios.delete(postUri + "/" + action._id);
@@ -28,7 +29,7 @@ export function* deletePost(action) {
     console.error(e);
   }
 }
-
+//add new post
 export function* addArticle(action) {
   try {
     yield axios.post(postUri, {
@@ -58,7 +59,7 @@ export function* patchArticle(action) {
     console.error(e);
   }
 }
-
+//delete comment
 export function* deleteComment(action) {
   try {
     yield axios.delete(commentUri + "/" + action._id);
@@ -69,7 +70,7 @@ export function* deleteComment(action) {
     console.error(e);
   }
 }
-
+//fetch comments
 export function* getComments() {
   try {
     const res = yield axios.get(commentUri);
