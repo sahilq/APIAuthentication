@@ -3,6 +3,7 @@ const morgan = require("morgan");
 const mongoose = require("mongoose");
 const cors = require("cors");
 
+//using mongoose for database connection
 mongoose.connect("mongodb://localhost/APIAuthentication", {
   useNewUrlParser: true
 });
@@ -11,11 +12,11 @@ db.on("error", console.error.bind(console, "error connection"));
 db.once("open", () => {
   console.log("DB CONNECTED");
 });
-const app = express();
+const app = express(); //init express as app
 app.use(cors());
 //Middlewares
-app.use(morgan("dev"));
-app.use(express.json());
+app.use(morgan("dev")); //logger
+app.use(express.json()); //body parser
 
 //Routes
 app.use("/users", require("./routes/users"));

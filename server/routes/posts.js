@@ -1,10 +1,10 @@
 const express = require("express");
-const router = express.Router();
+const router = express.Router(); //using default router instead promise router
 
 const passport = require("passport");
 require("../passport");
 const Posts = require("../controllers/posts");
-const Comments = require("../controllers/comments");
+const Comments = require("../controllers/comments"); //needed to delete comments related to post being deleted
 
 const passportJWT = passport.authenticate("jwt", { session: false });
 
@@ -49,17 +49,17 @@ router.patch("/:_id", passportJWT, (req, res) => {
     res.json(post).status(200);
   });
 });
-
+//deleting post
 router.delete("/:_id", passportJWT, (req, res) => {
   const id = req.params._id;
-
+  //deleting comments related to post
   Comments.deletePostComments(id, err => {
     if (err) {
       throw err;
     }
 
     res.sendStatus(200);
-  });
+  }); //deleting post now
   Posts.deletePost(id, (err, post) => {
     if (err) {
       throw err;

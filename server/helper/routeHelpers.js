@@ -1,3 +1,5 @@
+//middleware for server side validation
+
 const Joi = require("joi");
 
 module.exports = {
