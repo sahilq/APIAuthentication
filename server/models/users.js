@@ -21,6 +21,9 @@ const userSchema = new Schema({
     required: true
   }
 });
+
+//////////User Methods Required in user models//////////////
+
 //Hash password
 userSchema.pre("save", async function(next) {
   try {
