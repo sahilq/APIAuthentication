@@ -1,6 +1,8 @@
+// import libraries
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 
+// import navbar
 import Header from "./navBar";
 
 class App extends Component {
