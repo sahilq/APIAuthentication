@@ -4,7 +4,7 @@ const router = express.Router();
 const passport = require("passport");
 require("../passport");
 const Posts = require("../controllers/posts");
-const Comments = require("../models/comments");
+const Comments = require("../controllers/comments");
 
 const passportJWT = passport.authenticate("jwt", { session: false });
 

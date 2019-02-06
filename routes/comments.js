@@ -4,7 +4,7 @@ const passport = require("passport");
 
 require("../passport");
 
-const Comments = require("../models/comments");
+const Comments = require("../controllers/comments");
 
 const passportJWT = passport.authenticate("jwt", { session: false });
 
@@ -19,7 +19,6 @@ router.get("/", (req, res) => {
 
 router.post("/", passportJWT, (req, res) => {
   const comment = req.body;
-  console.log(comment);
 
   Comments.addComment(comment, (err, comment) => {
     if (err) {

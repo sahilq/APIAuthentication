@@ -26,27 +26,27 @@ const commentsSche = mongoose.Schema({
 });
 
 const comments = (module.exports = mongoose.model("comments", commentsSche));
+module.exports = comments;
+// module.exports.getComments = async (callback, limit) => {
+//   await comments.find(callback).limit(limit);
+// };
 
-module.exports.getComments = async (callback, limit) => {
-  await comments.find(callback).limit(limit);
-};
+// module.exports.addComment = async (comment, callback) => {
+//   await comments.create(comment, callback);
+// };
 
-module.exports.addComment = async (comment, callback) => {
-  await comments.create(comment, callback);
-};
+// module.exports.deleteComment = async (id, callback) => {
+//   const query = { _id: id };
+//   await comments.deleteOne(query, callback);
+// };
 
-module.exports.deleteComment = async (id, callback) => {
-  const query = { _id: id };
-  await comments.deleteOne(query, callback);
-};
-
-module.exports.deletePostComments = async (id, callback) => {
-  const query = { postId: id };
-  const found = comments.find(query);
-  if (found) {
-    console.log("FOUND COMMENTS");
-    await comments.deleteMany(query);
-  } else {
-    console.log("NO COMMENTS FOUND");
-  }
-};
+// module.exports.deletePostComments = async (id, callback) => {
+//   const query = { postId: id };
+//   const found = comments.find(query);
+//   if (found) {
+//     console.log("FOUND COMMENTS");
+//     await comments.deleteMany(query);
+//   } else {
+//     console.log("NO COMMENTS FOUND");
+//   }
+// };

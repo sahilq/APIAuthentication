@@ -14,7 +14,7 @@ class Header extends Component {
   }
   render() {
     return (
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark mb-1">
+      <nav className="navbar navbar-expand navbar-dark bg-dark mb-1">
         <Link className="navbar-brand" to="/">
           Node API Auth
         </Link>

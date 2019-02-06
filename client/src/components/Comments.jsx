@@ -12,15 +12,16 @@ class Comments extends Component {
     super();
 
     this.state = { body: "", reload: false };
-    socket.on("comment", () => {
+    socket.on("comment", async () => {
       console.log("comments received");
-      this.props.getComments();
+      await this.props.getComments();
     });
   }
 
   handleChange = event => {
     this.setState({ [event.target.id]: event.target.value });
   };
+
   handleSubmit = event => {
     if (this.props.isAuth) {
       event.preventDefault();
@@ -29,8 +30,8 @@ class Comments extends Component {
       const userId = this.props.userId;
       const userName = this.props.userName;
       this.props.addComment({ postId, body, userId, userName });
+      socket.emit("comment", body);
       this.setState({ body: "" });
-      socket.emit("comment");
     } else {
       event.preventDefault();
       this.setState({ body: "" });
