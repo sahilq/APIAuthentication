@@ -1,17 +1,21 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import io from "socket.io-client";
+import openSocket from "socket.io-client";
 
 import { SEND_COMMENT, DELETE_COMMENT, GET_COMMENTS } from "../actions/types";
 
-const socket = io();
+const socket = openSocket("http://localhost:5000");
 
 class Comments extends Component {
   constructor() {
     super();
 
-    this.state = { body: "" };
+    this.state = { body: "", reload: false };
+    socket.on("comment", () => {
+      console.log("comments received");
+      this.props.getComments();
+    });
   }
 
   handleChange = event => {
@@ -26,6 +30,7 @@ class Comments extends Component {
       const userName = this.props.userName;
       this.props.addComment({ postId, body, userId, userName });
       this.setState({ body: "" });
+      socket.emit("comment");
     } else {
       event.preventDefault();
       this.setState({ body: "" });

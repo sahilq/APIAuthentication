@@ -58,16 +58,16 @@ io.sockets.on(
 
     // When this user emits, client side: socket.emit('otherevent',some data);
 
-    // socket.on("comment", function(data) {
-    //   // Data comes in as whatever was sent, including objects
-    //   console.log("Received: 'comment' " + data);
+    socket.on("comment", function() {
+      // Data comes in as whatever was sent, including objects
+      console.log("Received: 'comment' ");
 
-    //   // Send it to all other clients
-    //   socket.broadcast.emit("comment", data);
+      // Send it to all other clients
+      // socket.broadcast.emit("comment");
 
-    //   // This is a way to send to everyone including sender
-    //   // io.sockets.emit('message', "this goes to everyone");
-    // });
+      // This is a way to send to everyone including sender
+      io.sockets.emit("comment");
+    });
 
     socket.on("disconnect", function() {
       console.log("Client has disconnected");
