@@ -3,21 +3,34 @@ import { connect } from "react-redux";
 
 import { SEND_COMMENT, DELETE_COMMENT, GET_COMMENTS } from "../actions/types";
 
-// import openSocket from "socket.io-client";
-// const socket = openSocket("http://localhost:5000");
-// socket.on("comment", async () => {
-//   console.log("comments received");
-//   await this.props.getComments();
-// });
-// // also line 35
+import openSocket from "socket.io-client";
+const socket = openSocket("http://192.168.1.140:5000");
+console.log(socket);
+////////////////////////////////////////////////////////
+// import openSocket from "socket.io-client";         //
+// const socket = openSocket("http://localhost:5000");//
+// socket.on("comment", async () => {                 //
+//   console.log("comments received");                //
+//   await this.props.getComments();                  //
+// });                                                //
+// // also line 35->// socket.emit("comment", body);  //
+////////////////////////////////////////////////////////
 
 class Comments extends Component {
   constructor() {
     super();
-
-    this.state = { body: "", reload: false };
+    socket.on("comment", data => {
+      console.log("comments received", data);
+      this.reloadComments();
+    });
+    this.state = { body: "" };
   }
-
+  reloadComments = async () => {
+    console.log("reloading");
+    await this.props.getComments(async () => {
+      await this.props.getComments();
+    });
+  };
   handleChange = event => {
     this.setState({ [event.target.id]: event.target.value });
   };
@@ -31,6 +44,7 @@ class Comments extends Component {
       const userName = this.props.userName;
       this.props.addComment({ postId, body, userId, userName });
       // socket.emit("comment", body);
+      socket.emit("comment", body);
       this.setState({ body: "" });
     } else {
       event.preventDefault();
