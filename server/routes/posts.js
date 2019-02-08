@@ -8,6 +8,32 @@ const Comments = require("../controllers/comments"); //needed to delete comments
 
 const passportJWT = passport.authenticate("jwt", { session: false });
 
+router.patch("/like/:_id", (req, res) => {
+  console.log("req body", req.body.user);
+  const user = req.body.user;
+  const id = req.params._id;
+
+  Posts.likePost(id, user, {}, (err, user) => {
+    if (err) {
+      throw err;
+    }
+  });
+  return res.json(user).status(200);
+});
+
+router.patch("/unlike/:_id", (req, res) => {
+  console.log("req body", req.body.user);
+  const user = req.body.user;
+  const id = req.params._id;
+
+  Posts.unlikePost(id, user, {}, (err, user) => {
+    if (err) {
+      throw err;
+    }
+  });
+  return res.json(user).status(200);
+});
+
 router.get("/", (req, res) => {
   Posts.getPosts((error, posts) => {
     if (error) {

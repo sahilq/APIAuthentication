@@ -20,3 +20,5 @@ export const GET_COMMENTS = "GET_COMMENTS";
 export const EDIT_ARTICLE = "EDIT_ARTICLE";
 export const DATA_LOADED = "DATA_LOADED";
 export const COMMENTS_LOADED = "COMMENTS_LOADED";
+
+export const POST_VOTE = "POST_VOTE";

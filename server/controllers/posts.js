@@ -27,6 +27,30 @@ module.exports = {
       title: post.title,
       article: post.article
     };
-    await Posts.findByIdAndUpdate(query, update, options, callback);
+    await Posts.findOneAndUpdate(query, update, options, callback);
+  },
+  likePost: async (id, user, options, callback) => {
+    const query = { _id: id };
+    console.log("COntroller");
+    console.log("user is", user);
+    await Posts.findByIdAndUpdate(
+      query,
+      { $push: { likedList: user } },
+      options,
+      callback
+    );
+    console.log("outof controller");
+  },
+  unlikePost: async (id, user, options, callback) => {
+    const query = { _id: id };
+    console.log("COntroller");
+    console.log("user is", user);
+    await Posts.findByIdAndUpdate(
+      query,
+      { $pull: { likedList: user } },
+      options,
+      callback
+    );
+    console.log("outof controller");
   }
 };

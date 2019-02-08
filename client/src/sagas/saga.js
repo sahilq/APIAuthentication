@@ -27,7 +27,8 @@ function* postComSaga() {
     yield takeLatest(types.DELETE_COMMENT, postCom.deleteComment),
     yield takeLatest(types.SEND_COMMENT, postCom.addComment),
     yield takeLatest(types.GET_COMMENTS, postCom.getComments),
-    yield takeLatest(types.EDIT_ARTICLE, postCom.patchArticle)
+    yield takeLatest(types.EDIT_ARTICLE, postCom.patchArticle),
+    yield takeLatest(types.POST_VOTE, postCom.postVote)
   ]);
 }
 //Root SAGA

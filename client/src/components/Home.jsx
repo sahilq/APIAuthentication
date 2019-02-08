@@ -2,13 +2,24 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Comments from "./Comments";
 
-import { DATA_LOADING } from "../actions/types";
+import { DATA_LOADING, POST_VOTE } from "../actions/types";
 
 export class Home extends Component {
   componentDidMount() {
     this.props.getData();
   }
-
+  act = e => {
+    if (this.props.isAuth) {
+      const info = {
+        user: this.props.userId,
+        postId: e.target.id,
+        action: e.target.value
+      };
+      this.props.postVote(info);
+    } else {
+      alert("You need to Login");
+    }
+  };
   render() {
     return (
       <div className="mb-3">
@@ -21,7 +32,26 @@ export class Home extends Component {
               className="overflow-auto list-group-itemm-2 p-2 list-group-item-secondary my-1"
               key={el._id}
             >
-              <p className="display-inline font-weight-bold">{el.title} </p>
+              <p className="display-inline font-weight-bold">
+                {el.title}{" "}
+                <span className=" float-right">
+                  <i>{el.likedList.length / 2}</i>
+                  <button
+                    className="btn btn-sm btn-info mx-3"
+                    id={el._id}
+                    onClick={this.act}
+                    value={
+                      el.likedList.includes(this.props.userId)
+                        ? "Unlike"
+                        : "Like"
+                    }
+                  >
+                    {el.likedList.includes(this.props.userId)
+                      ? "Unlike"
+                      : "Like"}
+                  </button>
+                </span>
+              </p>
 
               <hr />
               <p className="text-justify text-left">{el.article}</p>
@@ -50,7 +80,8 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
   return {
-    getData: () => dispatch({ type: DATA_LOADING })
+    getData: () => dispatch({ type: DATA_LOADING }),
+    postVote: info => dispatch({ type: POST_VOTE, info })
   };
 }
 export default connect(

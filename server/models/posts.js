@@ -15,11 +15,12 @@ const postsSche = mongoose.Schema({
     require: true,
     foreignField: true
   },
+  likedList: { type: Array, default: [] }, //change this
   date: {
     type: Date,
     default: Date.now
   }
 });
 
-const Posts = (module.exports = mongoose.model("Posts", postsSche));
+const Posts = mongoose.model("Posts", postsSche);
 module.exports = Posts;

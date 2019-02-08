@@ -5,6 +5,31 @@ import * as types from "../actions/types";
 const postUri = "http://192.168.1.140:5000/posts";
 const commentUri = "http://192.168.1.140:5000/comments";
 
+export function* postVote(action) {
+  if (action.info.action === "Like") {
+    const user = action.info.user;
+
+    yield axios.patch(
+      "http://localhost:5000/posts/like/" + action.info.postId,
+      { user }
+    );
+    yield put({
+      type: types.DATA_LOADING
+    });
+  } else {
+    const user = action.info.user;
+    yield axios.patch(
+      "http://localhost:5000/posts/unlike/" + action.info.postId,
+      {
+        user
+      }
+    );
+    yield put({
+      type: types.DATA_LOADING
+    });
+  }
+}
+
 //fetch post
 export function* getPosts() {
   try {
