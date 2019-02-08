@@ -35,7 +35,9 @@ export class Home extends Component {
               <p className="display-inline font-weight-bold">
                 {el.title}{" "}
                 <span className=" float-right">
-                  <i>{el.likedList.length / 2}</i>
+                  <i className="badge-secondary badge-sm badge">
+                    {el.likedList.length / 2}
+                  </i>
                   <button
                     className="btn btn-sm btn-info mx-3"
                     id={el._id}

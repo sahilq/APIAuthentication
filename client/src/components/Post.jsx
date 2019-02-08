@@ -47,7 +47,10 @@ export class Post extends Component {
                   key={el._id}
                 >
                   <p className="display-inline font-weight-bold">
-                    {el.title}{" "}
+                    {el.title}
+                    <span className="float-right badge-info badge badge-sm mt-1">
+                      Likes:{el.likedList.length}
+                    </span>
                     <button
                       className="badge badge-sm badge-danger mr-2 float-right "
                       onClick={() => this.props.deletePost(el._id)}
