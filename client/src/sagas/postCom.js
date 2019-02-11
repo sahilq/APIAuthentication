@@ -1,6 +1,7 @@
-import { put, call } from "redux-saga/effects";
+import { call } from "redux-saga/effects";
 import axios from "axios";
-import * as types from "../actions/types";
+
+import * as actions from "../actions/actionCreator";
 
 const postUri = "http://192.168.1.140:5000/posts";
 const commentUri = "http://192.168.1.140:5000/comments";
@@ -13,9 +14,7 @@ export function* postVote(action) {
       "http://localhost:5000/posts/like/" + action.info.postId,
       { user }
     );
-    yield put({
-      type: types.DATA_LOADING
-    });
+    yield call(actions.dataLoading);
   } else {
     const user = action.info.user;
     yield axios.patch(
@@ -24,9 +23,7 @@ export function* postVote(action) {
         user
       }
     );
-    yield put({
-      type: types.DATA_LOADING
-    });
+    yield call(actions.dataLoading);
   }
 }
 
@@ -35,10 +32,7 @@ export function* getPosts() {
   try {
     const res = yield call(axios.get, postUri);
 
-    yield put({
-      type: types.DATA_LOADED,
-      payload: res.data
-    });
+    yield call(actions.dataLoaded, res.data);
   } catch (e) {
     console.error(e);
   }
@@ -47,9 +41,7 @@ export function* getPosts() {
 export function* deletePost(action) {
   try {
     yield axios.delete(postUri + "/" + action._id);
-    yield put({
-      type: types.DATA_LOADING
-    });
+    yield call(actions.dataLoading);
   } catch (e) {
     console.error(e);
   }
@@ -62,9 +54,7 @@ export function* addArticle(action) {
       article: action.article.article,
       userId: action.article.userId
     });
-    yield put({
-      type: types.DATA_LOADING
-    });
+    yield call(actions.dataLoading);
   } catch (e) {
     console.error(e);
   }
@@ -77,9 +67,7 @@ export function* patchArticle(action) {
       article: action.article.article,
       title: action.article.title
     });
-    yield put({
-      type: types.DATA_LOADING
-    });
+    yield call(actions.dataLoading);
   } catch (e) {
     console.error(e);
   }
@@ -88,9 +76,7 @@ export function* patchArticle(action) {
 export function* deleteComment(action) {
   try {
     yield axios.delete(commentUri + "/" + action._id);
-    yield put({
-      type: types.GET_COMMENTS
-    });
+    yield call(actions.getComments);
   } catch (e) {
     console.error(e);
   }
@@ -100,11 +86,7 @@ export function* getComments() {
   try {
     const res = yield axios.get(commentUri);
     const data = res.data;
-
-    yield put({
-      type: types.COMMENTS_LOADED,
-      payload: data
-    });
+    yield call(actions.commentsLoaded, data);
   } catch (e) {
     console.error(e);
   }
@@ -118,9 +100,7 @@ export function* addComment(action) {
       userId: action.comment.userId,
       userName: action.comment.userName
     });
-    yield put({
-      type: types.GET_COMMENTS
-    });
+    yield call(actions.getComments);
   } catch (e) {
     console.error(e);
   }

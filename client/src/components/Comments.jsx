@@ -92,24 +92,26 @@ class Comments extends Component {
             }
           })}
         </ul>
-        <form onSubmit={this.handleSubmit}>
-          <div className="form-group">
-            <input
-              type="text"
-              maxLength="120"
-              id="body"
-              rows="1"
-              required
-              autoComplete="off"
-              className="form-control"
-              value={this.state.body}
-              onChange={this.handleChange}
-            />
-          </div>
-          <button type="submit" className="btn btn-success btn-sm">
-            Comment
-          </button>
-        </form>
+        {this.props.isAuth && (
+          <form onSubmit={this.handleSubmit}>
+            <div className="form-group">
+              <input
+                type="text"
+                maxLength="120"
+                id="body"
+                rows="1"
+                required
+                autoComplete="off"
+                className="form-control"
+                value={this.state.body}
+                onChange={this.handleChange}
+              />
+            </div>
+            <button type="submit" className="btn btn-success btn-sm">
+              Comment
+            </button>
+          </form>
+        )}
       </div>
     );
   }

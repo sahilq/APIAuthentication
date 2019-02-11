@@ -38,18 +38,18 @@ export class Post extends Component {
   render() {
     return (
       <div>
-        <ul className="list-group list-group-flush ">
+        <ul className="list-group list-group-flush">
           {this.props.articles.map(el => {
             if (el.userId === this.props.userId) {
               return (
                 <li
-                  className="overflow-auto list-group-item border border-success m-2 p-2"
+                  className=" bg-transparent overflow-auto list-group-item border border-success m-2 p-2"
                   key={el._id}
                 >
                   <p className="display-inline font-weight-bold">
                     {el.title}
                     <span className="float-right badge-info badge badge-sm mt-1">
-                      Likes:{el.likedList.length}
+                      Likes: {el.likedList.length / 2}
                     </span>
                     <button
                       className="badge badge-sm badge-danger mr-2 float-right "

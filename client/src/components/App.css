@@ -1,0 +1,7 @@
+.appHeader {
+  background-image: url("./img.jpg");
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

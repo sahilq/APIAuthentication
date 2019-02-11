@@ -9,16 +9,12 @@ export class Home extends Component {
     this.props.getData();
   }
   act = e => {
-    if (this.props.isAuth) {
-      const info = {
-        user: this.props.userId,
-        postId: e.target.id,
-        action: e.target.value
-      };
-      this.props.postVote(info);
-    } else {
-      alert("You need to Login");
-    }
+    const info = {
+      user: this.props.userId,
+      postId: e.target.id,
+      action: e.target.value
+    };
+    this.props.postVote(info);
   };
   render() {
     return (
@@ -34,25 +30,27 @@ export class Home extends Component {
             >
               <p className="display-inline font-weight-bold">
                 {el.title}{" "}
-                <span className=" float-right">
-                  <i className="badge-secondary badge-sm badge">
-                    {el.likedList.length / 2}
-                  </i>
-                  <button
-                    className="btn btn-sm btn-info mx-3"
-                    id={el._id}
-                    onClick={this.act}
-                    value={
-                      el.likedList.includes(this.props.userId)
+                <i className="badge-secondary badge-sm badge float-right mt-2">
+                  {el.likedList.length / 2}
+                </i>
+                {this.props.isAuth && (
+                  <span className=" float-right">
+                    <button
+                      className="btn btn-sm btn-info mx-3"
+                      id={el._id}
+                      onClick={this.act}
+                      value={
+                        el.likedList.includes(this.props.userId)
+                          ? "Unlike"
+                          : "Like"
+                      }
+                    >
+                      {el.likedList.includes(this.props.userId)
                         ? "Unlike"
-                        : "Like"
-                    }
-                  >
-                    {el.likedList.includes(this.props.userId)
-                      ? "Unlike"
-                      : "Like"}
-                  </button>
-                </span>
+                        : "Like"}
+                    </button>
+                  </span>
+                )}
               </p>
 
               <hr />
