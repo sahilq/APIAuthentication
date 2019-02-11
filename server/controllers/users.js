@@ -9,9 +9,10 @@ signtoken = newUser => {
     {
       sub: newUser._id,
       iat: new Date().getTime(),
-      exp: Math.floor(new Date() / 1000) + 60 * 60
+      iss: 18
     },
-    JWT_SECRET
+    JWT_SECRET,
+    { expiresIn: "1h" }
   );
 };
 //export function
