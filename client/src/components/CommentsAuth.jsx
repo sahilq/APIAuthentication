@@ -44,10 +44,13 @@ class CommentsAuth extends Component {
               return (
                 <li key={comment._id} className="list-group-flus m-3">
                   <div>
-                    <p className="text-justify text-left d-table-cell">
+                    {" "}
+                    <small className="float-right mb-1 ml-auto">
+                      {comment.userName}
+                    </small>
+                    <p className="text-justify text-left d-table-cell mr-auto">
                       {comment.body}
-                    </p>
-
+                    </p>{" "}
                     <button
                       className="btn btn-sm btn-link float-right p-0"
                       onClick={() => this.props.deleteComment(comment._id)}
