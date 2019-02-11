@@ -52,7 +52,8 @@ export function* addArticle(action) {
     yield axios.post(postUri, {
       title: action.article.title,
       article: action.article.article,
-      userId: action.article.userId
+      userId: action.article.userId,
+      userName: action.article.userName
     });
     yield call(actions.dataLoading);
   } catch (e) {

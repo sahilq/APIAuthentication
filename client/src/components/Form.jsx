@@ -19,7 +19,8 @@ class Form extends Component {
     const title = this.state.title;
     const article = this.state.article;
     const userId = this.props.userId;
-    this.props.addArticle({ title, article, userId });
+    const userName = this.props.userName;
+    this.props.addArticle({ title, article, userId, userName });
     this.setState({ title: "" });
     this.setState({ article: "" });
   };

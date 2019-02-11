@@ -15,6 +15,10 @@ const postsSche = mongoose.Schema({
     require: true,
     foreignField: true
   },
+  userName: {
+    type: "string",
+    require: true
+  },
   likedList: { type: Array, default: [] }, //change this
   date: {
     type: Date,

@@ -54,7 +54,11 @@ export class Home extends Component {
               </p>
 
               <hr />
-              <p className="text-justify text-left">{el.article}</p>
+              <p className="text-justify text-left">
+                {el.article}
+                <br />
+                <small>Author: {el.userName}</small>
+              </p>
               <small>
                 <p>Comments :</p>
               </small>

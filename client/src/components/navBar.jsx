@@ -16,16 +16,18 @@ class Header extends Component {
     return (
       <nav className="navbar navbar-expand navbar-dark bg-dark mb-1">
         <Link className="navbar-brand" to="/">
-          Node API Auth
+          HOME
         </Link>
 
         <div className=" collapse navbar-collapse">
           <ul className="navbar-nav mr-auto">
-            <li className="nav-item">
-              <Link className="nav-link" to="/dashboard">
-                Dashboard
-              </Link>
-            </li>
+            {this.props.isAuth ? (
+              <li className="nav-item">
+                <Link className="nav-link" to="/dashboard">
+                  Dashboard
+                </Link>
+              </li>
+            ) : null}
           </ul>
 
           <ul className="nav navbar-nav ml-auto">

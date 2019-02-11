@@ -10,7 +10,7 @@ class App extends Component {
   render() {
     return (
       <div className="appHeader">
-        {/* render nabBar */}
+        {/* render navBar */}
         <Header />
         {/* render components */}
         <div className="container">{this.props.children}</div>
