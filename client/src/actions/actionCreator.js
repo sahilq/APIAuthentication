@@ -15,6 +15,10 @@ export function signInReq(formData) {
 export function signOutReq() {
   return { type: types.AUTH_SIGN_OUT };
 }
+//Get Secret Request
+export function getSecReq() {
+  return { type: types.GET_SECRET };
+}
 //ASYNCHRONOUS
 //SIGN UP SUCCESS
 

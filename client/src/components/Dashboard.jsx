@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { GET_SECRET } from "../actions/types";
+import { getSecReq } from "../actions/actionCreator";
 import Post from "./Post";
 import Form from "./Form";
 
@@ -34,7 +34,7 @@ class Dashboard extends Component {
 
 function mapDispatchtoprops(dispatch) {
   return {
-    getSecret: () => dispatch({ type: GET_SECRET })
+    getSecret: () => dispatch(getSecReq())
   };
 }
 
