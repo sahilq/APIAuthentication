@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import CommentsAuth from "./CommentsAuth";
 
-import { DATA_LOADING, EDIT_ARTICLE, DELETE_POST } from "../actions/types";
+import { getPosts, deletePost, editPost } from "../actions/actionCreator";
 
 export class Post extends Component {
   constructor() {
@@ -120,9 +120,9 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
   return {
-    getData: () => dispatch({ type: DATA_LOADING }),
-    deletePost: _id => dispatch({ type: DELETE_POST, _id }),
-    patchArticle: (article, id) => dispatch({ type: EDIT_ARTICLE, article, id })
+    getData: () => dispatch(getPosts()),
+    deletePost: _id => dispatch(deletePost(_id)),
+    patchArticle: (article, id) => dispatch(editPost(article, id))
   };
 }
 export default connect(

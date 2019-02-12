@@ -11,11 +11,6 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case types.AUTH_SIGN_UP_ASYNC:
-      console.log(
-        action.payload.user.name,
-        "SIGNED UP WITH ID",
-        action.payload.user.id
-      );
       return {
         ...state,
         isAuthenticated: true,
@@ -25,7 +20,6 @@ export default (state = initialState, action) => {
         userName: action.payload.user.name
       };
     case types.AUTH_SIGN_IN_ASYNC:
-      console.log("SIGNED IN WITH ID", action.payload.user.id);
       return {
         ...state,
         isAuthenticated: true,

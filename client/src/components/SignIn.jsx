@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 
 import CustomInput from "./CustomInput";
-import { AUTH_SIGN_IN } from "../actions/types";
+import { signInReq } from "../actions/actionCreator";
 
 class SignIn extends Component {
   constructor() {
@@ -81,7 +81,7 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
   return {
-    authSignIn: formData => dispatch({ type: AUTH_SIGN_IN, payload: formData })
+    authSignIn: formData => dispatch(signInReq(formData))
   };
 }
 

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { GET_SECRET, DATA_LOADING } from "../actions/types";
+import { GET_SECRET } from "../actions/types";
 import Post from "./Post";
 import Form from "./Form";
 
@@ -10,8 +10,6 @@ class Dashboard extends Component {
 
   componentDidMount() {
     this.props.getSecret();
-
-    this.props.getData();
 
     console.log("GET DATA CALLED FROM DASHBOARD");
   }
@@ -36,8 +34,7 @@ class Dashboard extends Component {
 
 function mapDispatchtoprops(dispatch) {
   return {
-    getSecret: () => dispatch({ type: GET_SECRET }),
-    getData: () => dispatch({ type: DATA_LOADING })
+    getSecret: () => dispatch({ type: GET_SECRET })
   };
 }
 

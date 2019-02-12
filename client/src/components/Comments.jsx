@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { SEND_COMMENT, DELETE_COMMENT, GET_COMMENTS } from "../actions/types";
+import {
+  loadComments,
+  addComment,
+  deleteComment
+} from "../actions/actionCreator";
 
 import openSocket from "socket.io-client";
 const socket = openSocket("http://192.168.1.140:5000");
@@ -131,9 +135,9 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
   return {
-    addComment: comment => dispatch({ type: SEND_COMMENT, comment }),
-    deleteComment: _id => dispatch({ type: DELETE_COMMENT, _id }),
-    getComments: () => dispatch({ type: GET_COMMENTS })
+    addComment: comment => dispatch(addComment(comment)),
+    deleteComment: _id => dispatch(deleteComment(_id)),
+    getComments: () => dispatch(loadComments())
   };
 }
 

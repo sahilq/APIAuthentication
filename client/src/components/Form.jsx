@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { SEND_ARTICLE } from "../actions/types";
+import { addPost } from "../actions/actionCreator";
 
 class Form extends Component {
   constructor() {
@@ -72,7 +72,7 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
   return {
-    addArticle: article => dispatch({ type: SEND_ARTICLE, article })
+    addArticle: article => dispatch(addPost(article))
   };
 }
 export default connect(

@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 
 import CustomInput from "./CustomInput";
-import { AUTH_SIGN_UP } from "../actions/types";
+import { signUpRequest } from "../actions/actionCreator";
 
 class SignUp extends Component {
   constructor() {
@@ -97,7 +97,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    authSignUp: formData => dispatch({ type: AUTH_SIGN_UP, payload: formData })
+    authSignUp: formData => dispatch(signUpRequest(formData))
   };
 }
 

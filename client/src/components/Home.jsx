@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Comments from "./Comments";
 
-import { DATA_LOADING, POST_VOTE } from "../actions/types";
+import { getPosts, postVote } from "../actions/actionCreator";
 
 export class Home extends Component {
   componentDidMount() {
@@ -84,8 +84,8 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
   return {
-    getData: () => dispatch({ type: DATA_LOADING }),
-    postVote: info => dispatch({ type: POST_VOTE, info })
+    getData: () => dispatch(getPosts()),
+    postVote: info => dispatch(postVote(info))
   };
 }
 export default connect(

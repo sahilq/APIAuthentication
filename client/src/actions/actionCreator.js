@@ -2,14 +2,27 @@ import { put } from "redux-saga/effects";
 
 import * as types from "./types";
 //Auth action creator
-
-//SIGN UP
+//REQUESTS
+//Sign Up request
+export function signUpRequest(formData) {
+  return { type: types.AUTH_SIGN_UP, payload: formData };
+}
+//Sign In Request
+export function signInReq(formData) {
+  return { type: types.AUTH_SIGN_IN, payload: formData };
+}
+//Sign Out request
+export function signOutReq() {
+  return { type: types.AUTH_SIGN_OUT };
+}
+//ASYNCHRONOUS
+//SIGN UP SUCCESS
 
 export function* signUpSuccess(data) {
   yield put({ type: types.AUTH_SIGN_UP_ASYNC, payload: data });
 }
 
-//SIGN IN
+//SIGN IN SUCCESS
 export function* signInSuccess(res) {
   yield put({ type: types.AUTH_SIGN_IN_ASYNC, payload: res });
 }
@@ -33,7 +46,54 @@ export function* signOut() {
 }
 
 //Post and Comments Action Creator
+//Load request
+export function getPosts() {
+  console.log("action");
+  return {
+    type: types.DATA_LOADING
+  };
+}
+//Add posts request
+export function addPost(article) {
+  return { type: types.SEND_ARTICLE, article };
+}
+//Delete request
+export function deletePost(_id) {
+  return {
+    type: types.DELETE_POST,
+    _id
+  };
+}
+//Edit request
+export function editPost(article, id) {
+  return {
+    type: types.EDIT_ARTICLE,
+    article,
+    id
+  };
+}
+//Like/Unlike
+export function postVote(info) {
+  return {
+    type: types.POST_VOTE,
+    info
+  };
+}
+//load comments
+export function loadComments() {
+  return {
+    type: types.GET_COMMENTS
+  };
+}
+//Add comment
+export function addComment(comment) {
+  return { type: types.SEND_COMMENT, comment };
+}
 
+//Delete Comment
+export function deleteComment(_id) {
+  return { type: types.DELETE_COMMENT, _id };
+}
 //Fetching Posts from api
 export function* dataLoading() {
   yield put({

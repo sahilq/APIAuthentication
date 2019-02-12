@@ -49,6 +49,6 @@ module.exports = {
   }, //random protected resource for testing
   secret: async (req, res, next) => {
     console.log(`User.secret() called`);
-    res.json({ message: "IN USERS SECRET" });
+    res.json({ message: "IN USERS SECRET" }).status(201);
   }
 };

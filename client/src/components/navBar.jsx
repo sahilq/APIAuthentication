@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { AUTH_SIGN_OUT } from "../actions/types";
+
+import { signOutReq } from "../actions/actionCreator";
 
 class Header extends Component {
   constructor() {
@@ -60,7 +61,7 @@ class Header extends Component {
 }
 function mapDispatchToProps(dispatch) {
   return {
-    signOut: () => dispatch({ type: AUTH_SIGN_OUT })
+    signOut: () => dispatch(signOutReq())
   };
 }
 function mapstateToProps(state) {
