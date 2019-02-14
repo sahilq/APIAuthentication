@@ -29,6 +29,18 @@ module.exports = {
         .required(),
       name: Joi.string().required(),
       password: Joi.string().required()
+    }),
+    postSchema: Joi.object().keys({
+      title: Joi.string().required(),
+      article: Joi.string().required(),
+      userId: Joi.string().required(),
+      userName: Joi.string().required()
+    }),
+    commentSchema: Joi.object().keys({
+      postId: Joi.string().required(),
+      userId: Joi.string().required(),
+      userName: Joi.string().required(),
+      body: Joi.string().required()
     })
   }
 };

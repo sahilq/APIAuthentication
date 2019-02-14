@@ -6,6 +6,9 @@ require("../passport");
 
 const Comments = require("../controllers/comments");
 
+//validation
+const { validateBody, schemas } = require("../helper/routeHelpers");
+
 const passportJWT = passport.authenticate("jwt", { session: false });
 
 router.get("/", (req, res) => {
@@ -17,16 +20,21 @@ router.get("/", (req, res) => {
   });
 });
 
-router.post("/", passportJWT, (req, res) => {
-  const comment = req.body;
+router.post(
+  "/",
+  validateBody(schemas.commentSchema),
+  passportJWT,
+  (req, res) => {
+    const comment = req.body;
 
-  Comments.addComment(comment, (err, comment) => {
-    if (err) {
-      throw err;
-    }
-    res.json(comment).status(200);
-  });
-});
+    Comments.addComment(comment, (err, comment) => {
+      if (err) {
+        throw err;
+      }
+      res.json(comment).status(200);
+    });
+  }
+);
 
 // router.get("/:_id", (req, res) => {
 //   Comments.getCommentById(req.params._id, (err, comment) => {

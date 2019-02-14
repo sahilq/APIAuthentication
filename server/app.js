@@ -14,6 +14,7 @@ db.once("open", () => {
 });
 const app = express(); //init express as app
 app.use(cors());
+
 //Middlewares
 app.use(morgan("dev")); //logger
 app.use(express.json()); //body parser

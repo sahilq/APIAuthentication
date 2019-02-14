@@ -52,7 +52,6 @@ export function* signOut() {
 //Post and Comments Action Creator
 //Load request
 export function getPosts() {
-  console.log("action");
   return {
     type: types.DATA_LOADING
   };

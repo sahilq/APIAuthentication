@@ -6,9 +6,12 @@ require("../passport");
 const Posts = require("../controllers/posts");
 const Comments = require("../controllers/comments"); //needed to delete comments related to post being deleted
 
+//Validation
+const { validateBody, schemas } = require("../helper/routeHelpers");
+
 const passportJWT = passport.authenticate("jwt", { session: false });
 
-router.patch("/like/:_id", (req, res) => {
+router.patch("/like/:_id", passportJWT, (req, res) => {
   console.log("req body", req.body.user);
   const user = req.body.user;
   const id = req.params._id;
@@ -21,7 +24,7 @@ router.patch("/like/:_id", (req, res) => {
   return res.json(user).status(200);
 });
 
-router.patch("/unlike/:_id", (req, res) => {
+router.patch("/unlike/:_id", passportJWT, (req, res) => {
   console.log("req body", req.body.user);
   const user = req.body.user;
   const id = req.params._id;
@@ -43,7 +46,7 @@ router.get("/", (req, res) => {
   });
 });
 
-router.post("/", passportJWT, (req, res) => {
+router.post("/", validateBody(schemas.postSchema), passportJWT, (req, res) => {
   const post = req.body;
 
   Posts.addPost(post, (err, post) => {
