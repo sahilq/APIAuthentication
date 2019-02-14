@@ -3,6 +3,15 @@ const morgan = require("morgan");
 const mongoose = require("mongoose");
 const cors = require("cors");
 
+//Debuggers
+const appConsole = require("debug")("app:startup");
+const dbConsole = require("debug")("app:db");
+const socketConsole = require("debug")("app:socket");
+//Require Config
+const config = require("config");
+
+appConsole(`Application Name: ${config.get("name")}`);
+
 //using mongoose for database connection
 mongoose.connect("mongodb://localhost/APIAuthentication", {
   useNewUrlParser: true
@@ -10,13 +19,17 @@ mongoose.connect("mongodb://localhost/APIAuthentication", {
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "error connection"));
 db.once("open", () => {
-  console.log("DB CONNECTED");
+  dbConsole("DB CONNECTED");
 });
 const app = express(); //init express as app
 app.use(cors());
 
 //Middlewares
-app.use(morgan("dev")); //logger
+if (app.get("env") === "development") {
+  appConsole(`Morgan enabled`);
+  app.use(morgan("dev")); //logger
+}
+
 app.use(express.json()); //body parser
 
 //Routes
@@ -43,7 +56,7 @@ app.use((error, req, res, next) => {
 //Start Server
 const port = process.env.PORT || 5000;
 const server = app.listen(port);
-console.log(`Server running at ${port}`);
+appConsole(`Server running at ${port}`);
 
 //////////////////////////////////////////////////////////////////////////////////////
 
@@ -56,13 +69,13 @@ io.sockets.on(
   "connection",
   // We are given a websocket object in our function
   function(socket) {
-    console.log("We have a new client: " + socket.id);
+    socketConsole("New client: " + socket.id);
 
     // When this user emits, client side: socket.emit('otherevent',some data);
 
     socket.on("comment", async function(data) {
       // Data comes in as whatever was sent, including objects
-      console.log("Received: 'comment' ", data);
+      socketConsole("Received: 'comment' ", data);
 
       // Send it to all other clients
       await socket.broadcast.emit("comment", data);
@@ -72,7 +85,7 @@ io.sockets.on(
     });
 
     socket.on("disconnect", function() {
-      console.log("Client has disconnected");
+      socketConsole("Client has disconnected");
     });
   }
 );
